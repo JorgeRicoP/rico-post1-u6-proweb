@@ -15,6 +15,10 @@
     </c:if>
 
     <a href="${pageContext.request.contextPath}/app?comando=formulario">+ Nueva tarea</a>
+        <p>
+            ${sessionScope.usuarioActual.nombreCompleto} (${sessionScope.usuarioActual.rol}) |
+            <a href="${pageContext.request.contextPath}/app?comando=logout">Cerrar sesión</a>
+        </p>
 
     <table>
         <thead><tr>
