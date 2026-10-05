@@ -9,23 +9,27 @@
 </head>
 <body>
     <h1>Nueva tarea</h1>
-    <c:if test="${not empty error}">
-        <p class="error">${error}</p>
+    <c:if test="${not empty errores}">
+        <div class="alert-error">
+            <ul><c:forEach var="e" items="${errores}"><li>${e.value}</li></c:forEach></ul>
+        </div>
     </c:if>
     <form method="post" action="${pageContext.request.contextPath}/app" novalidate>
         <input type="hidden" name="comando" value="guardar">
 
         <label>Título:
-            <input type="text" name="titulo" value="<c:out value='${titulo}'/>">
+            <input type="text" name="titulo" value="<c:out value='${titulo}'/>"
+                   class="${not empty errores.titulo ? 'input-error' : ''}">
             <c:if test="${not empty errores.titulo}">
-                <span class="error">${errores.titulo}</span>
+                <span class="campo-error">${errores.titulo}</span>
             </c:if>
         </label>
 
         <label>Categoría:
-            <input type="text" name="categoria" value="<c:out value='${categoria}'/>">
+            <input type="text" name="categoria" value="<c:out value='${categoria}'/>"
+                   class="${not empty errores.categoria ? 'input-error' : ''}">
             <c:if test="${not empty errores.categoria}">
-                <span class="error">${errores.categoria}</span>
+                <span class="campo-error">${errores.categoria}</span>
             </c:if>
         </label>
 
@@ -36,15 +40,16 @@
                 <option value="Baja"  ${prioridad == 'Baja'  ? 'selected' : ''}>Baja</option>
             </select>
             <c:if test="${not empty errores.prioridad}">
-                <span class="error">${errores.prioridad}</span>
+                <span class="campo-error">${errores.prioridad}</span>
             </c:if>
         </label>
 
         <label>Fecha límite (yyyy-MM-dd):
             <input type="text" name="fechaLimite" placeholder="2026-12-20"
-                   value="<c:out value='${fechaLimite}'/>">
+                   value="<c:out value='${fechaLimite}'/>"
+                   class="${not empty errores.fechaLimite ? 'input-error' : ''}">
             <c:if test="${not empty errores.fechaLimite}">
-                <span class="error">${errores.fechaLimite}</span>
+                <span class="campo-error">${errores.fechaLimite}</span>
             </c:if>
         </label>
 
